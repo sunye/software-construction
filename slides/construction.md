@@ -1,9 +1,5 @@
 # Software Construction
 
-Gerson Sunyé
-gerson.sunye@univ-nantes.fr
-
-
 [comment]: # (TODO)
 [comment]: # (How to verify multiplicities?)
 [comment]: # (Mapping designs to Unit Tests?)
@@ -40,6 +36,7 @@ gerson.sunye@univ-nantes.fr
 ## Software Construction Sub-Activities
 Software construction is more than just programming: 
 
+- Software Designing
 - Coding and debugging
 - Unit Testing
 - Integration
@@ -51,10 +48,33 @@ note:
 The choice of construction method is a key aspect of the construction planning activity. The choice of construction method affects the extent to which construction prerequisites (e.g. Requirements analysis, Software design, .. etc) are performed, the order in which they are performed, and the degree to which they are expected to be completed before construction work begins. Construction planning also defines the order in which components are created and integrated, the software quality management processes, the allocation of task assignments to specific software engineers, and the other tasks, according to the chosen method.[1]
 
 ----
+## Roadmap
+
+1. Identify coding standards
+1. Identify an implementation strategy
+1. Implement detailed design
+1. Perform unit test
+1. Release for integration
+
+----
 ## Construction Technologies
 
 ----
 
+## Software Design
+
+- The Unified Modeling Language (UML). [Version 2.5](http://www.omg.org/spec/UML/).
+- OMG standard containing:
+  - A notation (concrete syntax)
+  - A meta-model (abstract syntax)
+  - Almost **no semantics**!
+- Several diagrams (concerns), one model.
+- Several actors and processes, one syntax.
+  - Reduces the learning curve, but:
+  - Increases misinterpretation and confusion!<!-- .element: class="fragment highlight-red" -->
+
+
+----
 ## Automatic Code Generation
 - Code generate (part of) the code from the design model.
 - Several tools available: Xtend, Acceleo, etc.
@@ -349,6 +369,17 @@ class Dependency {
 
 note:
 If a different implementation is needed (ArrayList, SynchronizedArrayList, etc.), maintenance is simplified.
+
+----
+## Coding Conventions
+
+- Generic conventions (for Java):
+  - [Sun/Oracle Code Conventions](https://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html)
+  - [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+- Project specific:
+  - [GNU Coding Standards](https://www.gnu.org/prep/standards/html_node/index.html)
+  - [Mozilla Coding Style Guide](https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Coding_Style)
+  - [Apache Coding Standards](https://portals.apache.org/development/code-standards.html)
 
 ----
 ## Conclusion
