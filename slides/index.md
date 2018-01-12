@@ -5,7 +5,10 @@ Gerson Sunyé
 
 gerson.sunye@univ-nantes.fr
 
+
+
 ----
+## Licence
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 International License](http://creativecommons.org/licenses/by-nc/4.0/).
 
@@ -21,4 +24,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 ----
 
 ## Liens utiles
+
+- [The Unified Modeling Language](https://www.uml-diagrams.org)
+- [Introduction to the Diagrams of UML 2.X](http://www.agilemodeling.com/essays/umlDiagrams.htm)
 
