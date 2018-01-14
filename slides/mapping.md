@@ -450,7 +450,9 @@ public class HTMLPage {
 ----
 ### Create a _wrapper_ class for  attribute types
 
-![](resources/png/htmlpage.png)<!-- .element: style="position:absolute; left:0px; top:200px; width:20%;" -->
+![](resources/png/htmlpage.png)
+
+<!-- .element: style="position:absolute; left:0px; top:200px; width:20%;" -->
 
 ```java
 public class Attribute<T> {
@@ -473,7 +475,9 @@ public class Attribute<T> {
 
 ### Read-only attributes
 
-![](resources/png/htmlpage.png)<!-- .element: style="position:absolute; left:0px; top:200px; width:20%;" -->
+![](resources/png/htmlpage.png)
+
+<!-- .element: style="position:absolute; left:0px; top:200px; width:20%;" -->
 
 ```java
 public class ReadOnlyAttribute<T> {
@@ -494,7 +498,9 @@ public class ReadOnlyAttribute<T> {
 ----
 ### Derived attributes
 
-![](resources/png/htmlpage.png)<!-- .element: style="position:absolute; left:0px; top:200px; width:20%;" -->
+![](resources/png/htmlpage.png)
+
+<!-- .element: style="position:absolute; left:0px; top:200px; width:250px;" -->
 
 ```java
 public class SizeAttribute<T> {
@@ -511,17 +517,17 @@ public class SizeAttribute<T> {
     }
 }
 ```
-<!-- .element: style="position:absolute;  right:0px; top:200px; width:750px" -->
+<!-- .element: style="position:absolute;  left:260px; top:200px; width:750px" -->
 
 ----
 ### Create a private filed for each non-derived attribute.
 
-![](resources/png/htmlpage.png)<!-- .element: style="position:absolute; left:0px; top:200px; width:200px;" -->
+![](resources/png/htmlpage.png)<!-- .element: style="position:absolute; left:0px; top:200px; width:250;" -->
 
 ```java
 public class HTMLPage {
 	private final Attribute<String> title = 
-        new Attribute<String>();
+        new ReadOnlyAttribute<String>();
 	private final Attribute<Integer> version = 
         new Attribute<Integer>();
 	private final Attribute<String> contents = 
@@ -614,7 +620,8 @@ public class HTMLPage {
 ----
 
 ![](resources/png/patient.png)
-<!-- .element: style="width:200px; position:absolute; left:0px; top:0px;"-->
+
+<!-- .element: style="position:absolute; left:000px; top:200px; width:250px; "-->
 
 ```java
 public class Patient {
@@ -625,10 +632,10 @@ public class Patient {
 	public final List<Double> temperatures =
         new ArrayList<Double>;
 	public final Collection<String> notes =
-        new ArrayList();
+        new ArrayList<String>();
 }
 ```
-<!-- .element: style="position:absolute;  left:250px; top:200px; width:750px" -->
+<!-- .element: style="position:absolute;  left:260px; top:200px; width:750px" -->
 
 ----
 
@@ -796,16 +803,16 @@ public class MultivaluedAttribute<T> {
 ```java
 public class Patient {
 	private final MultivaluedAttribute<String> pathologies =
-        new MultivaluedAttribute(new HashSet<String>());
+        new MultivaluedAttribute<String>(new HashSet<String>());
             
 	private final MultivaluedAttribute<String>  exams =
-        new MultivaluedAttribute(new ArrayList<String>());
+        new MultivaluedAttribute<String>(new ArrayList<String>());
         
 	private final MultivaluedAttribute<Double> temperatures =
-        new MultivaluedAttribute(new ArrayList<Double>());
+        new MultivaluedAttribute<double>(new ArrayList<Double>());
         
 	private final MultivaluedAttribute<String> notes =
-        new MultivaluedAttribute(new ArrayList<String>());
+        new MultivaluedAttribute<String>(new ArrayList<String>());
 }
 ```
 <!-- .element: style="position:absolute;  left:250px; top:200px; width:750px" -->
@@ -816,16 +823,16 @@ public class Patient {
 
 ```java
 public class Patient {
-    public MultivaluedAttribute<String> getPathologies() {
+    public MultivaluedAttribute<String> pathologies() {
         return this.pathologies;
     }
-    public MultivaluedAttribute<String> getExams() {
+    public MultivaluedAttribute<String> exams() {
         return this.examns;
     }
-    public MultivaluedAttribute<Double> getTemperature() {
+    public MultivaluedAttribute<Double> temperature() {
         return this.temperatures;
     }
-    public MultivaluedAttribute<String> getNotes() {
+    public MultivaluedAttribute<String> notes() {
         return this.notes;
     }
 }
