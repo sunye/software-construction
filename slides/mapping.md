@@ -1,10 +1,14 @@
-# Mapping Designs to Code
+## Mapping UML Designs to Code
+### Structural Aspects
 
 ----
 ## Plan
 
 - Introduction
 - Creating an Implementation Strategy
+- Classes
+- Attributes
+- Associations
 
 
 ----
@@ -43,7 +47,9 @@ Translating a UML model to object-oriented source code is a difficult tasks:
 
 - Introduction
 - Creating an Implementation Strategy
-
+- Classes
+- Attributes
+- Associations
 
 ----
 ##  Creating an Implementation Strategy
@@ -54,6 +60,15 @@ Translating a UML model to object-oriented source code is a difficult tasks:
 3. Rules for multi-valued attribute implementation.
 3. Rules for unidirectional association implementation.
 3. Rules for bidirectional association implementation.
+
+----
+## Plan
+
+- Introduction
+- Creating an Implementation Strategy
+- Classes
+- Attributes
+- Associations
 
 ----
 ## Step 1
@@ -233,6 +248,16 @@ UML	| Java
 `Real` | `double` 
 
 ----
+## Plan
+
+- Introduction
+- Creating an Implementation Strategy
+- Classes
+- Attributes
+- Associations
+
+----
+
 ## Step 3
 ### Monovalued Attribute Implementation
 
@@ -850,8 +875,18 @@ public class Patient {
 - Extensible: other methods/behaviors can be implemented, e.g. the Java `List` interface.
 
 ----
+## Plan
+
+- Introduction
+- Creating an Implementation Strategy
+- Classes
+- Attributes
+- Associations
+
+----
+
 ## Step 5
-###Unidirectional Association Implementation
+### Unidirectional Association Implementation
 
 ----
 ![](resources/png/open-parenthesis.png)
@@ -866,12 +901,507 @@ public class Patient {
 ----
 ### Associations have directions
 
-![](resources/png/uml-association-directions)
+![](resources/png/uml-association-directions.png)
+
+----
+### Associations have properties
+
+![](resources/png/uml-association-properties.png)
 
 ----
 ![](resources/png/close-parenthesis.png)
 
 ----
 
+## Unidirectional  Associations
+
+- Different approaches:
+    2. Getters and Setters.
+    3. Cursors.
+
+----
+## Getters and Setters
+
+- Rationale
+  - Monovalued roles ([0..1], [1]): similar to attributes.
+  - Multivalued roles ([0..2], [*], etc.): use the `Collection` interface:
+    - Applies the ([Decorator](https://www.tutorialspoint.com/design_pattern/decorator_pattern.htm) design pattern.
+  - Visibility is ensured by accessor visibilities. 
+
+![](resources/png/client-account-card.png) <!-- .element: style="width:60%;" -->
+
+----
+![](resources/png/card-account.png)
+
+```java
+public class Card {
+    private Account account;
+    
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account anAccount) {
+        this.account = anAccount;
+    }
+}
+
+```
+
+----
+![](resources/png/folder-pages-uni.png)
+
+```java
+public class HTMLFolder {
+
+    private Collection<HTMLPage> pages = new PageCollection(new HashSet<HTMLPage>());
+
+    public Collection<HTMLPage> getPages() {
+        return pages;
+    }
+}
+```
+
+----
+
+```java
+public class PageCollection implements Collection<HTMLPage> {
+
+    private Collection<HTMLPage> pages;
+
+    public PageCollection(Collection<HTMLPage> list) {
+        this.pages = list;
+    }
+
+    public int size() {
+        return pages.size();
+    }
+
+    public boolean isEmpty() {
+        return pages.isEmpty();
+    }
+
+    public boolean contains(Object o) {
+        return pages.contains(o);
+    }
+
+    public Iterator<HTMLPage> iterator() {
+        // TODO: Implement the Iterator!
+        return pages.iterator();
+    }
+
+    public Object[] toArray() {
+        return pages.toArray();
+    }
+
+    public <T> T[] toArray(T[] a) {
+        return pages.toArray(a);
+    }
+
+    public boolean add(HTMLPage htmlPage) {
+        return pages.add(htmlPage);
+    }
+
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    public boolean containsAll(Collection<?> c) {
+        return pages.containsAll(c);
+    }
+
+    public boolean addAll(Collection<? extends HTMLPage> c) {
+        return pages.addAll(c);
+    }
+
+    public boolean addAll(int index, Collection<? extends HTMLPage> c) {
+        return false;
+    }
+
+    public boolean removeAll(Collection<?> c) {
+        return pages.removeAll(c);
+    }
+
+    public boolean retainAll(Collection<?> c) {
+        return pages.retainAll(c);
+    }
+
+    public void clear() {
+        pages.clear();
+    }
+
+    public HTMLPage get(int index) {
+        return get(index);
+    }
+
+    public HTMLPage set(int index, HTMLPage element) {
+        return set(index, element);
+    }
+
+    public boolean remove(int index) {
+        return pages.remove(index);
+    }
 
 
+    public int lastIndexOf(Object o) {
+        return lastIndexOf(o);
+    }
+
+}
+```
+
+
+----
+## Getter/Setter Approach Wrap-up
+
+- Mono- and multi-valued roles have different interfaces.
+- The `Collection` decorator allows the addition of new behavior:
+  - Upper-bound multiplicity check.
+  - Constraints.
+- Unique roles may use the JCF `Set` implementations (`HashSet`, `TreeSet`, etc.).
+
+----
+## «Cursors» Approach
+- Rationale:
+  - Mono- and multi-valued roles use the same interface, the `Cursor`.
+  - Cursors are specific to each role.
+
+![](resources/png/cursor.png)<!-- .element: style="position:absolute; right:0px; width:200px;" -->
+
+
+----
+
+![](resources/png/folder-files.png)
+
+![](resources/png/file-cursor.png)<!-- .element: style="width:40%;"-->
+
+----
+
+![](resources/png/folder-files.png)
+
+```java
+public interface Folder {
+
+    String getName();
+    void setName(String aName);
+
+    FileCursor files();
+}
+```
+
+----
+
+![](resources/png/folder-files.png)
+
+```java
+public interface File {
+
+    Integer getSize();
+    void setSize(Integer aSize);
+
+    String getName();
+    void setName(String aName);
+}
+```
+
+----
+### FileCursor
+
+```java
+public class FileCursor implements Cursor<File>, File {
+
+    Collection<File> files;
+    Optional<File> current;
+
+    public FileCursor(Collection<File> aCollection) {
+        files = aCollection;
+    }
+
+    @Override
+    public Integer getSize() {
+        if (current.isPresent()) {
+            return current.get().getSize();
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
+    @Override
+    public void setSize(Integer aSize) {
+        if(!current.isPresent()) {
+            throw new IllegalStateException();
+        }
+        current.get().setSize(aSize);
+    }
+
+    @Override
+    public String getName() {
+        if (current.isPresent()) {
+            return current.get().getName();
+        } else {
+            throw new IllegalStateException();
+        }
+    }
+
+    @Override
+    public void setName(String aName) {
+        if(!current.isPresent()) {
+            throw new IllegalStateException();
+        }
+        current.get().setName(aName);
+    }
+
+    @Override
+    public boolean valid() {
+        return false;
+    }
+
+    @Override
+    public void next() {
+
+    }
+
+    @Override
+    public void remove() {
+
+    }
+
+    @Override
+    public void insert(File file) {
+
+    }
+}
+```
+
+
+----
+## Cursors Approach Wrap-up
+
+- Mono- and multi-valued roles have the same interface.
+  - Is it a good thing?
+- Cursors have less methods than Collections.
+- Cursors allow the addition of new behavior:
+  - Upper-bound multiplicity check.
+  - Constraints.
+- Unique roles may use the JCF Set implementations (HashSet, TreeSet, etc.).
+- Respects the «Demeter» law.
+
+
+----
+## Step 6 
+### Bidirectional  Association Implementation
+
+----
+
+![](resources/png/open-parenthesis.png)
+
+----
+## Handshaking
+
+![](resources/png/folder-files-bi.png)
+
+- Referential integrity
+  - A file cannot belong to two folders at the same time.
+  - Adding a file to a folder should have the same effect as setting the folder of a file.
+
+
+----
+
+![](resources/png/snapshot1.png)
+
+```java
+doc.setFolder(archive)
+```
+
+```java
+archive.getFiles().add(doc)
+```
+
+----
+
+![](resources/png/snapshot2.png)
+
+----
+
+![](resources/png/snapshot3.png)
+
+----
+
+![](resources/png/close-parenthesis.png)
+
+----
+## Bidirectional  Associations
+
+- Different approaches:
+    2. Getters and Setters.
+    3. Cursors.
+
+----
+## Bidirectional  Associations
+### Simple Case
+
+![](resources/png/folder-files-bi-readonly.png)
+
+----
+
+![](resources/png/folder-files-bi-readonly.png)
+
+```java
+public class File {
+    private Folder folder;
+
+    public File(Folder aFolder) {
+        folder = aFolder;
+    }
+
+    public Folder getFolder() {
+        return folder;
+    }
+}
+```
+
+----
+
+## Bidirectional  Associations
+
+![](resources/png/folder-files-bi.png)
+
+- To ensure the integrity:
+  - `file.setFolder(folder)` must call `folder.getFiles().add(file)` **and**
+  - `folder.getFiles().add(file)` must call `file.setFolder(folder)` 
+  - Problem: How to avoid the loop ? <!-- .element: class="fragment"-->
+
+
+----
+
+### Solution 1: let the client call both
+```java
+Folder folder = new Folder();
+File file = new File();
+
+file.setFolder(folder);
+folder.getFiles.add(file);
+```
+
+----
+### Problems
+
+- All clients must respect this rule.
+- Difficult to ensure during the class lifetime.
+
+----
+### Solution 2: use auxiliary methods
+
+- Add a method called `basicSet(Folder)` to the class `File`.
+- Add a method called `basicAdd(File)` to the class `FileCollection`.
+
+----
+
+![](resources/png/sd-add-file.png)
+
+----
+
+![](resources/png/sd-set-folder.png)
+
+----
+### More problems
+
+- Getter/Setter approach: `basicAdd()` is not in the `List` interface.
+- Cursor approach: each cursor must know its opposite (not so simple).
+
+----
+## Step 7
+### Operation Implementation
+
+----
+
+![](resources/png/open-parenthesis.png)
+
+----
+
+## Operations, Receptions, and Methods
+
+
+- An _Operation_ is a feature of a class that specifies the name, type, parameters, and constraints for invoking an associated behavior.
+- A _Reception_ specifies that a class is prepared to receive a _Signal_.
+- Methods can implement both, operations and receptions. Method execution is either synchronous, or asynchronous.
+
+----
+
+## Receptions and Signals
+
+![](resources/png/receptions.png)
+
+----
+
+## Operations
+
+![](resources/png/operations.png)
+
+----
+
+![](resources/png/close-parenthesis.png)
+
+
+----
+## Operation implementation
+
+![](resources/png/operations.png)<!-- .element: style="width:20%;" -->
+
+```java
+public class Book {
+
+    public boolean reserve(Reader aReader) {
+        // TODO
+        return false;
+    }
+
+    public void deliver() {
+        // TODO
+    }
+
+    public void borrow() {
+        // TODO
+    }
+
+    public void returnBook() {
+        // TODO
+    }
+}
+```
+
+----
+## Reception implementation
+![](resources/png/receptions.png)<!-- .element: style="width:40%;" -->
+
+```
+public class Notify implements Serializable {
+
+    public final String message;
+
+    public Notify(String message) {
+        this.message = message;
+    }
+}
+```
+
+----
+
+![](resources/png/receptions.png)<!-- .element: style="width:40%;" -->
+
+```java
+public class Alarm {
+
+    private final BlockingQueue<Notify> notifications = 
+        new ArrayBlockingQueue<Notify>(10);
+
+    public void accept(Notify notify) {
+        this.notifications.offer(notify);
+    }
+
+    // TODO: write a thread that reads the blocking queue and executes the notification.
+}
+```
+
+----
+## Conclusion

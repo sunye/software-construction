@@ -40,6 +40,10 @@ public class Event {
     }
 
     public void setName(@Nonnull String str) {
+        Validate.notNull(str);
+        Objects.nonNull(str);
+
+
         name = str;
     }
 
@@ -56,6 +60,7 @@ public class Event {
     }
 
     protected void setStart(@Nonnull Date d) {
+        Validate.isTrue(d.before(end));
         start = d;
     }
 
@@ -64,6 +69,8 @@ public class Event {
     }
 
     protected void setEnd(@Nonnull Date d) {
+        Validate.isTrue(d.after(start));
+
         end = d;
     }
 
