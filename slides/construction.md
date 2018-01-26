@@ -195,7 +195,7 @@ Writing build scripts is also “code construction”
 - If something goes wrong, it can determine what was changed and by who.
 - CVS, SVN, Git, Mercurial, etc.
 
-![](resources/tiff/git-logo.tiff)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
+![](resources/tiff/git-logo.png)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
 
 note:
 In software engineering, software configuration management (SCM or S/W CM)[1] is the task of tracking and controlling changes in the software, part of the larger cross-disciplinary field of configuration management.[2] SCM practices include revision control and the establishment of baselines. If something goes wrong, SCM can determine what was changed and who changed it. If a configuration is working well, SCM can determine how to replicate it across many hosts.
@@ -210,7 +210,7 @@ In software engineering, software configuration management (SCM or S/W CM)[1] is
 - Test-driven development
 - JUnit, TestNG, Selenium, etc.
 
-![](resources/tiff/junit-logo.tiff)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
+![](resources/tiff/junit-logo.png)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
 
 ----
 
@@ -225,7 +225,7 @@ In software engineering, software configuration management (SCM or S/W CM)[1] is
 - Legacy code (or other software) may be an important source of information
 - Automatic analysis/modification of legacy code: MoDisco, Spoon, etc
 
-![](resources/tiff/modisco-logo.tiff)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
+![](resources/tiff/modisco-logo.png)<!-- .element: style=" width:200px; position:absolute; right:0px;"-->
 
 ----
 
@@ -241,7 +241,7 @@ In software engineering, software configuration management (SCM or S/W CM)[1] is
 
 ## Continuous Integration
 
-![](resources/tiff/continuous-integration.tiff)
+![](resources/tiff/continuous-integration.png)
 
 ----
 

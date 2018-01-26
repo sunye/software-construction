@@ -1,0 +1,18 @@
+group 'fr.unantes'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.3'
+}
