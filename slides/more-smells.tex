@@ -1,0 +1,158 @@
+
+
+
+
+\begin{frame} {Méthodes outil}
+\vspace{1cm}
+	\begin{itemize}
+	\item Ce sont des méthodes sans référence à this (ou self, current, \ldots).	
+	\item Souvent, peuvent être placées ailleurs: vérifier les paramètres.
+	\item Doivent au moins être marquées (e.g. «utility»).
+	\end{itemize}
+	
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame} {Attributs d'instance peu utilisés}
+\vspace{1cm}
+	\begin{itemize}
+	\item Si certaines instances les utilisent, et d'autres non: créer 
+	des sous-classes.	
+	\item Si utilisés seulement lors d'une opération particulière, considérer la création
+		d'un objet-opérateur.
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+\frametitle{Même nom, différentes significations.}
+%\framesubtitle{}
+Conduit à une mauvaise interprétation du code:
+\begin{itemize}
+\item Identificateurs identiques: réutiliser une variable locale à une autre fin est souvent signe d'une méthode trop longue.
+\item Vocabulaire surchargé (in english): Order, Serialize, Thread, etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame} {Paramètres rattachés}
+\vspace{1cm}
+	\begin{itemize}
+	\item Cachent souvent un manque d'abstraction.	
+	\item (e.g. Point).
+	\item Une fois la classe créée, il est souvent facile d'y ajouter
+		un comportement spécifique.
+	\end{itemize}
+\end{frame}
+
+
+
+
+%\begin{frame} {Titre}
+%Type Embedded in Name
+%Avoid redundancy in naming. Prefer schedule.add(course) to schedule.addCourse(course)
+%Rename Method
+%\end{frame}
+
+%\begin{frame} {Titre}
+%Uncommunicative Name
+%Choose names that communicate intent (pick the best name for the time, change it later if necessary).
+%Rename Method
+%\end{frame}
+
+%\begin{frame} {Titre}
+%Inconsistent Names
+%Use names consistently.
+%Rename Method
+%\end{frame}
+
+%\begin{frame} {Titre}
+%Dead Code
+%A variable, parameter, method, code fragment, class, etc is not used anywhere (perhaps other than in tests).
+%Delete the code.
+%\end{frame}
+
+
+%\part{Smells Between Classes}
+%
+%\begin{frame} {Titre}
+%Primitive Obsession
+%Use small objects to represent data such as money (which combines quantity and currency) or a date range object
+%Replace Data Value with Object
+%Replace Type Code with Class  Replace Type Code with Subclasses
+%Replace Type Code with State/Strategy
+%If you have a group of fields that should go together, use Extract Class
+%If the primitives occur in a param lists use Introduce Parameter Object  When working with an array consider Replace Array With Object
+%\end{frame}
+%
+%
+%\begin{frame} {Titre}
+%
+%Data Clumps
+%Clumps of data items that are always found together.
+%Turn the clumps into an object with Extract Class Then continue the refactoring with Introduce Parameter Object  or Preserve Whole Object
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Refused Bequest
+%Subclasses don't want or need everything they inherit.
+%The Liskov Substitution Principle (LSP) says that you should be able to treat any subclass of a class as an example of that class.
+%Most of the time that's fine, just don't use what you don't need. Occassionally you'll need to create a new sibling class and use Push Down Method and Push Down Field
+%The smell is worst if a subclass is reusing behavior but does not want to support the interface of the superclass. In this case use Replace Inheritance with Delegation
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Inappropriate Intimacy
+%Two classes are overly entertwined.
+%Move Method  Move Field
+%Change Bidirectional Association to Unidirectional Association
+%Extract Class  Hide Delegate  Replace Inheritance with Delegation
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Lazy Class
+%Classes that aren't doing enough should be refactored away.
+%Collapse Hierarchy
+%Inline Class
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%
+%Feature Envy
+%Often a method that seems more interested in a class other than the one it's actually in. In general, try to put a method in the class that contains most of the data the method needs.
+%Move Method  May need to use Extract Method first, then Move Method
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Message Chains
+%This is the case in which a client has to use one object to get another, and then use that one to get to another, etc. Any change to the intermediate relationships causes the client to have to change.
+%Hide Delegate
+%Or try using Extract Method and then Move Method to move it down the chain.
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Middle Man
+%When a class is delegating almost everything to another class, it may be time to refactor out the middle man.
+%Remove Middle Man
+%If only a few methods aren't doing much, use Inline Method
+%You could also consider turning the middle man into a subclass with Replace Delegation with Inheritance
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Divergent Change
+%Occurs when one class is commonly changed in different ways for different reasons. Any change to handle a variation should change a single class.
+%Identify everything that changes for a particular cause and use Extract Class to put them all together.
+%\end{frame}
+%
+%\begin{frame} {Titre}
+%Shotgun Surgery
+%The opposite of Divergent Change. A change results in the need to make a lot of little changes in several classes.
+%Use Move Method and Move Field to put all the changes into a single class.
+%Often you can use Inline Class to bring a whole bunch of behavior together.
+%\end{frame}
+
