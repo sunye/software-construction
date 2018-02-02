@@ -479,8 +479,6 @@ public class AsciiStrategy {
 
 ----
 
-
-
 ## Plan
 
 - Introduction
@@ -599,6 +597,8 @@ Bloaters are code, methods and classes that have increased to such gargantuan pr
 
 - Methods should be public, unless they violate a class invariant.
 - Only public methods can be tested.
+
+----
 
 ## Code Smells (2/5)
 
