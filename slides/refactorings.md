@@ -6,9 +6,11 @@
 
 - Introduction<!-- .element: class="fragment highlight-blue" -->
 - Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
 - Automatization
 - Conclusion
 
@@ -200,9 +202,11 @@ public class ConcreteB extends IntermediateClass {}
 
 - Introduction
 - Refactoring Operations<!-- .element: class="fragment highlight-blue" -->
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
 - Automatization
 - Conclusion
 
@@ -307,9 +311,85 @@ public class ConcreteB extends IntermediateClass {}
 
 - Introduction
 - Refactoring Operations
-- Refactor to Improve Design<!-- .element: class="fragment highlight-blue" -->
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction
+- When to Refactor<!-- .element: class="fragment highlight-blue" -->
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
+- Automatization
+- Conclusion
+
+----
+
+## When to Refactor
+
+Strategies during construction:
+
+1. Extend and then refactor
+1. Refactor to extend
+1. Debug and then refactor 
+1. Refactor to debug
+1. Refactor to understand
+
+----
+
+### Extend and then refactor
+
+When you need to add a new functionality:
+
+- Find a  class or method with similar behavior and copy it
+- Make it work
+- Eliminate redundancy
+
+----
+
+### Refactor to extend
+
+- A functionality seems too complex to implement
+- Refactor the current design to make the change easy
+- Make the change
+
+----
+
+### Debug and then refactor 
+
+- Locate and fix the bug
+- Refactor tge code to make the bug obvious: 
+  - Add assertions
+  - Extract method
+  - Assign meaningful names 
+  - Create explaining constants for magic numbers
+  - Create explaining constants or variables for complex expressions
+
+----
+
+### Refactor to debug
+
+- Since refactor operations are behavior-preserving, they also preserve bad behavior.
+- Before debugging, refactor to simplify complex code 
+- Then, debug it 
+
+----
+
+### Refactor to understand
+
+- Refactor when trying to understand a complex code:
+  - Split large methods
+  - Create explaining constants or variables for magic numbers
+  - Assign meaningful names 
+  - Do not worry about performance
+
+----
+
+## Plan
+
+- Introduction
+- Refactoring Operations
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility<!-- .element: class="fragment highlight-blue" -->
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
 - Automatization
 - Conclusion
 
@@ -375,7 +455,7 @@ public class Client {
 
 ```java
 public class Client {
-    private writeStrategy = new AsciiStrategy();
+    private WriteStrategy writeStrategy = new AsciiStrategy();
     public void writeOn(OutputStream o) {
         writeStrategy.writeOn(this, o)}
 }
@@ -399,85 +479,17 @@ public class AsciiStrategy {
 
 ----
 
-## Plan
 
-- Introduction
-- Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction<!-- .element: class="fragment highlight-blue" -->
-- Automatization
-- Conclusion
-
-----
-
-## Refactor and Software Construction
-
-Strategies during construction:
-
-1. Extend and then refactor
-1. Refactor to extend
-1. Debug and then refactor 
-1. Refactor to debug
-1. Refactor to understand
-
-----
-
-### Extend and then refactor
-
-When you need to add a new functionality:
-
-- Find a  class or method with similar behavior and copy it
-- Make it work
-- Eliminate redundancy
-
-----
-
-### Refactor to extend
-
-- A functionality seems too complex to implement
-- Refactor the current design to make the change easy
-- Make the change
-
-----
-
-### Debug and then refactor 
-
-- Locate and fix the bug
-- Refactor tge code to make the bug obvious: 
-  - Add assertions
-  - Extract method
-  - Assign meaningful names 
-  - Create explaining constants for magic numbers
-  - Create explaining constants or variables for complex expressions
-
-----
-
-### Refactor to debug
-
-- Since refactor operations are behavior-preserving, they also preserve bad behavior.
-- Before debugging, refactor to simplify complex code 
-- Then, debug it 
-
-----
-
-### Refactor to understand
-
-- Refactor when trying to understand a complex code:
-  - Split large methods
-  - Create explaining constants or variables for magic numbers
-  - Assign meaningful names 
-  - Do not worry about performance
-
-----
 
 ## Plan
 
 - Introduction
 - Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability<!-- .element: class="fragment highlight-blue" -->
-- Integrate Refactoring to Software Construction
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability<!-- .element: class="fragment highlight-blue" -->
+- Integrate Refactoring to Software Development Process
 - Automatization
 - Conclusion
 
@@ -655,7 +667,7 @@ A dispensable is something pointless and unneeded whose absence would make the c
 
 ----
 
-#### Comments 
+#### Comments
 
 - A comment should describe an intention and not explain an action.
 - Too many unnecessary comments overloads the code and make it unreadable.
@@ -736,6 +748,8 @@ public class Entreprise extends Person {
 - Remove unused parameters
 - Methods named with odd abstract names should be brought down to earth with Rename Method
 
+----
+
 ## Code Smells (5/5)
 
 ### Couplers
@@ -778,9 +792,11 @@ public class EnterpriseGroup extends Group {
 
 - Introduction
 - Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction<!-- .element: class="fragment highlight-blue" -->
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process<!-- .element: class="fragment highlight-blue" -->
 - Automatization
 - Conclusion
 
@@ -823,9 +839,11 @@ public class EnterpriseGroup extends Group {
 
 - Introduction
 - Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
 - Automatization<!-- .element: class="fragment highlight-blue" -->
 - Conclusion
 
@@ -854,9 +872,11 @@ public class EnterpriseGroup extends Group {
 
 - Introduction
 - Refactoring Operations
-- Refactor to Improve Design
-- Refactor to Improve Maintainability
-- Integrate Refactoring to Software Construction
+- When to Refactor
+- Why Refactor
+  - Refactor to Improve Extensibility
+  - Refactor to Improve Maintainability
+- Integrate Refactoring to Software Development Process
 - Automatization
 - Conclusion<!-- .element: class="fragment highlight-blue" -->
 
@@ -865,7 +885,7 @@ public class EnterpriseGroup extends Group {
 ## Conclusion
 
 - Evolutionary Software Development
-- Refactorings
+- Refactoring operations
 - How to find smelly code
 - Ways of integrating refactoring into your process
 
@@ -876,7 +896,7 @@ public class EnterpriseGroup extends Group {
 - PhD Thesis from William Opdyke, Don Roberts, and John Brant.
 - Martin Fowler's book and [website](http://www.refactoring.com)
 - [eXtreme Programming](http://www.extremeprogramming.org)
-- [SourceMaking](https://sourcemaking.com/refactoring)
+- [Source Making](https://sourcemaking.com/refactoring)
 - [Coding Horror Blog](https://blog.codinghorror.com/code-smells/)
 
 ----
