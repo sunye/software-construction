@@ -15,7 +15,7 @@
 
 ## Mapping Designs to Code
 
-Translating a UML model to object-oriented source code is a difficult tasks:
+Translating a UML model to object-oriented source code is a difficult task:
 - UML has several diagrams representing different aspects of the model.
 - The mapping from UML concepts (classes, associations, signals, states, operations, etc.) to OO concepts (classes, fields, and methods) is not trivial.
 - UML lacks semantics: there is no universal rule for mapping design to code.
