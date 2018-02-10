@@ -38,4 +38,9 @@ public class BookWithStates implements Book {
     public Integer id() {
         return null;
     }
+
+    @Override
+    public String title() {
+        return null;
+    }
 }

@@ -1,9 +1,18 @@
 package fr.unantes.time;
 
-/**
- * Created on 08/02/2018.
- *
- * @author sunye.
- */
-public class Interval {
+
+public class Interval<T extends Comparable> {
+
+    private final T begin;
+    private final T end;
+
+    protected Interval(T begin, T end) {
+        this.begin = begin;
+        this.end = end;
+    }
+
+    public boolean includes(T i) {
+        return i.compareTo(begin) >= 0 && i.compareTo(end) <= 0;
+    }
 }
+

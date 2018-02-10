@@ -16,6 +16,5 @@ public class CM {
 
         List<Integer> integers = new ArrayList<>();
 
-        integers.stream().
     }
 }
