@@ -44,6 +44,23 @@
         sensitive, 
 		texcl
         }}{}
+
+\lstnewenvironment{ocl}{\lstset{language=[decorative]OCL,
+	frame=tb,
+	tabsize=3,
+	morekeywords={implies,result,flatten,body,init,OrderedSet,self,Tuple,TupleType,def,attr,oclIsUndefined,oclIsInvalid,OclState,let,in},
+	morecomment=[l]{--},
+	basicstyle=\footnotesize,
+	keywordstyle=\bfseries,
+	ndkeywordstyle=\bfseries,
+	commentstyle=\itshape,
+	stringstyle=\ttfamily,
+	showspaces=false,
+	flexiblecolumns,
+	literate={->}{$\to$}{2} {--}{-$\,$-}{2} {<=}{$\le$}{2} {>=}{$\ge$}{2} {<>}{$<\,>$}{3},
+	sensitive, extendedchars, texcl}}{}
+
+
 		
 \newcommand{\code}[1]{\lstinline{#1}} 
 \graphicspath{{./img/}}
@@ -108,7 +125,7 @@
 
 %\begin{questions}
 	
-\chapter{Mapping UML Designs to Code}
+\chapter{Mapping UML Designs to Code \\ Structural Aspects}
 
 
 During Software Construction, the mapping between design models and source code is essential. 
@@ -302,6 +319,95 @@ Remember that you must handle the handshake problem.
 	\end{figure}
 	
 \end{question}
+
+\chapter{Mapping UML Designs to Code \\ Behavioral Aspects}
+
+\section{Implementing Operations from pre- and post-conditions specifications}
+
+	Consider the class \code{Interval}, illustrated by Figure~\ref{fig:interval}.
+	This class has one invariant (Listing~\ref{lst:interval:inv}) and two operations,
+	\code{overlapsWith()} (Listing~\ref{lst:overlaps}) and \code{includes()} (Listing~\ref{lst:includes}).
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=.4\linewidth]{Interval.png}
+	\caption{The class «Interval»}
+	\label{fig:interval}
+\end{figure}
+
+
+\lstset{caption={Interval invariant},label=lst:interval:inv,float=htbp}
+\begin{ocl}
+context Interval(T)
+inv: self.end > self.begin
+\end{ocl}
+
+\lstset{caption={Operation overlapsWith()},label=lst:overlaps,float=htbp}
+\begin{ocl}
+context Interval(T)::overlapsWith(other : Interval(T)):Boolean
+-- This interval overlaps with another if it includes the others begin or end values
+-- or if the other contains this interval begin value.
+post: result = self.includes(other.begin) or self.includes(other.end) or
+			other.includes(self.begin)
+\end{ocl}
+
+
+\lstset{caption={Operation includes()},label=lst:includes,float=htbp}
+\begin{ocl}
+context Interval(T)::includes(value : T):Boolean
+-- This interval includes a value if it is between begin and end.
+post: result = value >= begin and value <= end
+\end{ocl}
+
+
+\begin{question}
+	First, implement the class «Interval» and its two attributes, without the two operations.
+	Propose an approach to ensure that the class invariant will never be violated.
+\end{question}
+
+\begin{solution}
+	Sorry no correction for now, but I guess the invariant can be checked in the constructor and both attributes could be final.
+\end{solution}
+
+\begin{question}
+	Second, implement the operations \code{includes()} and \code{overlapsWith()}, respecting the post-conditions specified above.
+\end{question}
+
+\begin{solution}
+			\lstinputlisting[language=Java]{./src/main/java/fr/unantes/agenda/Interval.java}
+\end{solution}
+
+
+\section{Implementing Operations from Activity diagrams}
+
+
+
+\code{Event}
+
+\code{RecurringEvent}
+
+Event::conflictsWith(other : Event): Boolean
+
+RecurringEvent::conflicts(other : Event): Boolean
+
+RecurringEvent::conflicts(other : RecurringEvent): Boolean
+
+daily x daily
+daily x weekly
+daily x monthly
+daily x yearly
+
+weekly x weekly
+weekly x monthly
+weekly x yearly
+
+monthly x monthly
+monthly x yearly
+
+yearly x yearly
+
+
+Repetition: daily, weekly, monthly, yearly 
 
 
 \end{document}
