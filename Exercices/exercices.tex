@@ -361,7 +361,15 @@ post: result = value >= begin and value <= end
 
 
 \begin{question}
-	First, implement the class «Interval» and its two attributes, without the two operations.
+	First, use JUnit to write some unit tests that verify that the class invariant is correctly respected as well as the correction of the tool operations.
+\end{question}
+
+\begin{solution}
+	\lstinputlisting[language=Java]{./src/test/java/fr/unantes/agenda/IntervalTest.java}
+\end{solution}
+
+\begin{question}
+	Second, implement the class «Interval» and its two attributes, without the two operations.
 	Propose an approach to ensure that the class invariant will never be violated.
 \end{question}
 
@@ -370,7 +378,7 @@ post: result = value >= begin and value <= end
 \end{solution}
 
 \begin{question}
-	Second, implement the operations \code{includes()} and \code{overlapsWith()}, respecting the post-conditions specified above.
+	 Finally, implement the operations \code{includes()} and \code{overlapsWith()}, respecting the post-conditions specified above.
 \end{question}
 
 \begin{solution}
@@ -378,36 +386,36 @@ post: result = value >= begin and value <= end
 \end{solution}
 
 
-\section{Implementing Operations from Activity diagrams}
-
-
-
-\code{Event}
-
-\code{RecurringEvent}
-
-Event::conflictsWith(other : Event): Boolean
-
-RecurringEvent::conflicts(other : Event): Boolean
-
-RecurringEvent::conflicts(other : RecurringEvent): Boolean
-
-daily x daily
-daily x weekly
-daily x monthly
-daily x yearly
-
-weekly x weekly
-weekly x monthly
-weekly x yearly
-
-monthly x monthly
-monthly x yearly
-
-yearly x yearly
-
-
-Repetition: daily, weekly, monthly, yearly 
+% \section{Implementing Operations from Activity diagrams}
+%
+%
+%
+% \code{Event}
+%
+% \code{RecurringEvent}
+%
+% Event::conflictsWith(other : Event): Boolean
+%
+% RecurringEvent::conflicts(other : Event): Boolean
+%
+% RecurringEvent::conflicts(other : RecurringEvent): Boolean
+%
+% daily x daily
+% daily x weekly
+% daily x monthly
+% daily x yearly
+%
+% weekly x weekly
+% weekly x monthly
+% weekly x yearly
+%
+% monthly x monthly
+% monthly x yearly
+%
+% yearly x yearly
+%
+%
+% Repetition: daily, weekly, monthly, yearly
 
 
 \end{document}
