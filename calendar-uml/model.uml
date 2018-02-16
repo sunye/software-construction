@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_zgybUBCeEeiFsNUTFhALig" name="NewModel"/>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_zgybUBCeEeiFsNUTFhALig" name="NewModel">
+  <packagedElement xmi:type="uml:Class" xmi:id="_21efMBCeEeiFsNUTFhALig" name="Interval" visibility="public">
+    <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_4roIgBCeEeiFsNUTFhALig" parameter="_4rovkBCeEeiFsNUTFhALig">
+      <ownedParameter xmi:type="uml:ClassifierTemplateParameter" xmi:id="_4rovkBCeEeiFsNUTFhALig" default="_4rovkRCeEeiFsNUTFhALig" parameteredElement="_4rovkRCeEeiFsNUTFhALig">
+        <ownedDefault xmi:type="uml:Class" xmi:id="_4rovkRCeEeiFsNUTFhALig" name="T" templateParameter="_4rovkBCeEeiFsNUTFhALig"/>
+      </ownedParameter>
+    </ownedTemplateSignature>
+    <ownedAttribute xmi:id="_5S15gBCeEeiFsNUTFhALig" name="begin" visibility="private" type="_4rovkRCeEeiFsNUTFhALig">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5S2gkBCeEeiFsNUTFhALig" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5S2gkRCeEeiFsNUTFhALig" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_6pbR8BCeEeiFsNUTFhALig" name="end" visibility="private">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6pb5ABCeEeiFsNUTFhALig"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6pb5ARCeEeiFsNUTFhALig" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_AdgwcBCfEeiFsNUTFhALig" name="includes">
+      <ownedParameter xmi:id="_ENsdgBCfEeiFsNUTFhALig" name="value" type="_4rovkRCeEeiFsNUTFhALig"/>
+      <ownedParameter xmi:id="_ENwu8BCfEeiFsNUTFhALig" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_FvCUcBCfEeiFsNUTFhALig" name="overlapsWith">
+      <ownedParameter xmi:id="_J7j_QBCfEeiFsNUTFhALig" name="other" type="_21efMBCeEeiFsNUTFhALig"/>
+      <ownedParameter xmi:id="_J7oQsBCfEeiFsNUTFhALig" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1G9KEBCtEeibhJJLmdkcBw" name="Event" visibility="public"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_2zqjgBCtEeibhJJLmdkcBw" name="Frequency" visibility="public"/>
+</uml:Model>

@@ -4,3 +4,10 @@ dist
 *.log
 .sass-cache
 /index.html
+.idea
+build
+out
+target
+*.out
+*.aux
+*.synctex.gz
