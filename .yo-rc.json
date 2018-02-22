@@ -1,0 +1,11 @@
+{
+  "generator-reveal": {
+    "presentationTitle": "Software Construction and Evolution",
+    "packageVersion": "0.0.1",
+    "revealTheme": "simple",
+    "useSass": false,
+    "deployToGithubPages": true,
+    "githubUsername": "sunye",
+    "githubRepository": "software-construction"
+  }
+}
