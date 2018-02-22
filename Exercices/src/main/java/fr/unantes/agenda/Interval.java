@@ -15,8 +15,20 @@ public class Interval<T extends Comparable> {
         this.end = end;
     }
 
+    public T begin() {
+        return begin;
+    }
+
+    public T end() {
+        return end;
+    }
+
     public boolean includes(T value) {
         return value.compareTo(begin) >= 0 && value.compareTo(end) <= 0;
+    }
+
+    public boolean overlapsWith(Interval<T> other) {
+        return false;
     }
 }
 
