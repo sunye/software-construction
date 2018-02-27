@@ -18,7 +18,7 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{exsheets}
-\SetupExSheets{solution/print=false}
+\SetupExSheets{solution/print=true}
 \usepackage{booktabs}
 \usepackage{paralist}
 
@@ -41,6 +41,7 @@
 
 \lstnewenvironment{java}{\lstset{language=Java,        
         flexiblecolumns,
+		keywordstyle=\bfseries,
         sensitive, 
 		texcl
         }}{}
@@ -365,6 +366,7 @@ post: result = value >= begin and value <= end
 \end{question}
 
 \begin{solution}
+	\lstset{language=Java}
 	\lstinputlisting[language=Java]{./src/test/java/fr/unantes/agenda/IntervalTest.java}
 \end{solution}
 
@@ -382,12 +384,15 @@ post: result = value >= begin and value <= end
 \end{question}
 
 \begin{solution}
+	\lstset{language=Java}
 			\lstinputlisting[language=Java]{./src/main/java/fr/unantes/agenda/Interval.java}
 \end{solution}
 
 
-% \section{Implementing Operations from Activity diagrams}
-%
+\section{Implementing Operations from Activity diagrams}
+
+Consider the classes \code{Event}, \code{SimpleEvent} and \code{}
+
 %
 %
 % \code{Event}
