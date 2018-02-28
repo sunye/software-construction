@@ -384,44 +384,70 @@ post: result = value >= begin and value <= end
 \end{question}
 
 \begin{solution}
-	\lstset{language=Java}
+	\lstset{language=Java, caption={Class Interval},}
 			\lstinputlisting[language=Java]{./src/main/java/fr/unantes/agenda/Interval.java}
 \end{solution}
 
 
 \section{Implementing Operations from Activity diagrams}
 
-Consider the classes \code{Event}, \code{SimpleEvent} and \code{}
+Consider the classes \code{Event}, \code{SingleEvent} and \code{RecurrentEvent} illustrated by Figure~\ref{fig:recurrent}.
+The class \code{Event} has only one operations, \code{conflictsWith()}, whose algorithm is given by Figure~\ref{fig:conflicts}.
+The goal of this operation is to check whether two events happen at the same time. 
+This is rather simple for single events, but complex for recurrent events.
 
-%
-%
-% \code{Event}
-%
-% \code{RecurringEvent}
-%
-% Event::conflictsWith(other : Event): Boolean
-%
-% RecurringEvent::conflicts(other : Event): Boolean
-%
-% RecurringEvent::conflicts(other : RecurringEvent): Boolean
-%
-% daily x daily
-% daily x weekly
-% daily x monthly
-% daily x yearly
-%
-% weekly x weekly
-% weekly x monthly
-% weekly x yearly
-%
-% monthly x monthly
-% monthly x yearly
-%
-% yearly x yearly
-%
-%
-% Repetition: daily, weekly, monthly, yearly
 
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=.8\linewidth]{cd-recurrent-event.png}
+	\caption{Classes «Event», «SingleEvent», and «RecurrentEvent»}
+	\label{fig:recurrent}
+\end{figure}
+
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=\linewidth]{ad-conflicts.png}
+	\caption{Activity Diagram for «conflictsWith» operation}
+	\label{fig:conflicts}
+\end{figure}
+
+
+\begin{question}
+	First, use a «double dispatch» mechanism to choose the correct implementation of the \code{conflictsWith()} operation.
+	
+	\begin{inparaenum}[(A)]
+		\item Add the methods \code{conflictsWithSingleEvent()} and \code{conflictsWithRecurrentEvent()} to the \code{Event} class.
+		\item Implement the methods \code{SingleEvent::conflictsWith()} and \code{RecurrentEvent::conflictsWith()} and make them call the correct implementation methods.
+	\end{inparaenum}
+\end{question}
+
+\begin{solution}
+\begin{enumerate}
+	\item In the implementation I use the \code{java.time} package. It uses date and time without considering time zones.
+	\item The code is still incomplete: the intersection method is still Work TODO.
+	\item I'm not a big fan of the double dispatch: it makes the superclass depend on subclasses (bad practice).
+	
+\end{enumerate}
+\end{solution}
+
+\begin{question}
+Add a method named \code{occurrences()} to class \code{RecurrentEvent}.
+This method must generate all occurrences of a recurrent event. 
+\end{question}
+
+\begin{solution}
+\lstset{language=Java, caption={Operation conflictsWith()},}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/Event.java}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/AbstractEvent.java}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/SingleEvent.java}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/RecurrentEvent.java}
+\end{solution}
+
+\begin{question}
+Finally, implement the 3 \code{conflictsWith()} methods: one that compares 2 single events, one that compares a single event with
+a recurrent event, and one that compares two recurrent events.
+\end{question}
 
 \end{document}
 

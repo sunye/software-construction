@@ -61,8 +61,13 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_HIZIQBYqEeitmIFlZvlVIA" name="RecurrentEvent" visibility="public">
     <generalization xmi:id="_T5CJMBYqEeitmIFlZvlVIA" general="_1G9KEBCtEeibhJJLmdkcBw"/>
     <ownedAttribute xmi:id="_exGQMBYwEeitmIFlZvlVIA" name="frequency" visibility="public" type="_2zqjgBCtEeibhJJLmdkcBw">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_exGQMRYwEeitmIFlZvlVIA"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_exGQMRYwEeitmIFlZvlVIA" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_exGQMhYwEeitmIFlZvlVIA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_LRApUBxSEeiktqE5H6Adsg" name="end" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/XMLPrimitiveTypes.library.uml#Date"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LRBQYBxSEeiktqE5H6Adsg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LRB3cBxSEeiktqE5H6Adsg" value="1"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_WNHrsBYqEeitmIFlZvlVIA" name="SingleEvent" visibility="public">
@@ -74,4 +79,107 @@
     </templateBinding>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_5noKkBYsEeitmIFlZvlVIA" name="DateTime" visibility="public"/>
+  <packagedElement xmi:type="uml:Activity" xmi:id="_DN2fQBwSEeiktqE5H6Adsg" name="Conflicts With" node="_i5qDsBxUEeiktqE5H6Adsg _kcKYQBxUEeiktqE5H6Adsg _vwt1sBxUEeiktqE5H6Adsg _IAVbYBxVEeiktqE5H6Adsg _RUGs0BxVEeiktqE5H6Adsg _cOZQIBxVEeiktqE5H6Adsg _leoFYBxVEeiktqE5H6Adsg _vvKhEBxVEeiktqE5H6Adsg _HFZnsBxWEeiktqE5H6Adsg _Iu6jMBxWEeiktqE5H6Adsg _QV14UBxWEeiktqE5H6Adsg _WKCEgBxWEeiktqE5H6Adsg _e4kh8BxWEeiktqE5H6Adsg _iK084BxWEeiktqE5H6Adsg">
+    <ownedParameter xmi:id="_kcJxMBxUEeiktqE5H6Adsg" name="one"/>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_xkan8BxUEeiktqE5H6Adsg" target="_vwt1sBxUEeiktqE5H6Adsg" source="_i5qDsBxUEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_xkan8RxUEeiktqE5H6Adsg" name="Initial1_To_Decision1_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_xkbPABxUEeiktqE5H6Adsg" name="Initial1_To_Decision1_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_QKv4EBxVEeiktqE5H6Adsg" target="_IAVbYBxVEeiktqE5H6Adsg" source="_vwt1sBxUEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_QKv4ERxVEeiktqE5H6Adsg" name="Decision1_To_Compare Single Events_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_QKwfIBxVEeiktqE5H6Adsg" name="Decision1_To_Compare Single Events_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_TkjFcBxVEeiktqE5H6Adsg" target="_RUGs0BxVEeiktqE5H6Adsg" source="_IAVbYBxVEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_TkjsgBxVEeiktqE5H6Adsg" name="Compare Single Events_To_Final_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_TkjsgRxVEeiktqE5H6Adsg" name="Compare Single Events_To_Final_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_huy9oBxVEeiktqE5H6Adsg" target="_cOZQIBxVEeiktqE5H6Adsg" source="_vwt1sBxUEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_huy9oRxVEeiktqE5H6Adsg" name="Comparison Kind_To_Compare SIngle with Recurrent_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_huzksBxVEeiktqE5H6Adsg" name="Comparison Kind_To_Compare SIngle with Recurrent_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_qM2IABxVEeiktqE5H6Adsg" target="_leoFYBxVEeiktqE5H6Adsg" source="_cOZQIBxVEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_qM2IARxVEeiktqE5H6Adsg" name="Compare SIngle with Recurrent_To_Generate all Recurring Occurrences_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_qM2IAhxVEeiktqE5H6Adsg" name="Compare SIngle with Recurrent_To_Generate all Recurring Occurrences_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_2BxHkBxVEeiktqE5H6Adsg" target="_vvKhEBxVEeiktqE5H6Adsg" source="_leoFYBxVEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_2BxHkRxVEeiktqE5H6Adsg" name="Generate all Recurring Occurrences_To_Check if Occurrences contain Single Event_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_2BxuoBxVEeiktqE5H6Adsg" name="Generate all Recurring Occurrences_To_Check if Occurrences contain Single Event_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_2ufqsBxVEeiktqE5H6Adsg" target="_RUGs0BxVEeiktqE5H6Adsg" source="_vvKhEBxVEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_2ufqsRxVEeiktqE5H6Adsg" name="Check if Occurrences contain Single Event_To_Final_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_2ufqshxVEeiktqE5H6Adsg" name="Check if Occurrences contain Single Event_To_Final_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_Ne6HcBxWEeiktqE5H6Adsg" target="_Iu6jMBxWEeiktqE5H6Adsg" source="_vwt1sBxUEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_Ne6HcRxWEeiktqE5H6Adsg" name="Comparison Kind_To_Compare two Recurrent Events_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_Ne6HchxWEeiktqE5H6Adsg" name="Comparison Kind_To_Compare two Recurrent Events_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_OkUQUBxWEeiktqE5H6Adsg" target="_HFZnsBxWEeiktqE5H6Adsg" source="_Iu6jMBxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_OkU3YBxWEeiktqE5H6Adsg" name="Compare two Recurrent Events_To_Fork1_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_OkU3YRxWEeiktqE5H6Adsg" name="Compare two Recurrent Events_To_Fork1_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_ca_sQBxWEeiktqE5H6Adsg" target="_QV14UBxWEeiktqE5H6Adsg" source="_HFZnsBxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_ca_sQRxWEeiktqE5H6Adsg" name="Fork1_To_Generate all occurrences for event One_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_cbATUBxWEeiktqE5H6Adsg" name="Fork1_To_Generate all occurrences for event One_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_dUBmABxWEeiktqE5H6Adsg" target="_WKCEgBxWEeiktqE5H6Adsg" source="_HFZnsBxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_dUCNEBxWEeiktqE5H6Adsg" name="Fork1_To_Generate all occurrences for event Other_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_dUCNERxWEeiktqE5H6Adsg" name="Fork1_To_Generate all occurrences for event Other_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_gggwIBxWEeiktqE5H6Adsg" target="_e4kh8BxWEeiktqE5H6Adsg" source="_QV14UBxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_gggwIRxWEeiktqE5H6Adsg" name="Generate all occurrences for event One_To_Join1_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_gggwIhxWEeiktqE5H6Adsg" name="Generate all occurrences for event One_To_Join1_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_heai0BxWEeiktqE5H6Adsg" target="_e4kh8BxWEeiktqE5H6Adsg" source="_WKCEgBxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_hebJ4BxWEeiktqE5H6Adsg" name="Generate all occurrences for event Other_To_Join1_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_hebJ4RxWEeiktqE5H6Adsg" name="Generate all occurrences for event Other_To_Join1_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_l4hWoBxWEeiktqE5H6Adsg" target="_iK084BxWEeiktqE5H6Adsg" source="_e4kh8BxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_l4h9sBxWEeiktqE5H6Adsg" name="Join1_To_Intersection_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_l4h9sRxWEeiktqE5H6Adsg" name="Join1_To_Intersection_weight"/>
+    </edge>
+    <edge xmi:type="uml:ControlFlow" xmi:id="_mnO2wBxWEeiktqE5H6Adsg" target="_RUGs0BxVEeiktqE5H6Adsg" source="_iK084BxWEeiktqE5H6Adsg">
+      <guard xmi:type="uml:LiteralBoolean" xmi:id="_mnO2wRxWEeiktqE5H6Adsg" name="Intersection_To_Final_guard" value="true"/>
+      <weight xmi:type="uml:LiteralInteger" xmi:id="_mnO2whxWEeiktqE5H6Adsg" name="Intersection_To_Final_weight"/>
+    </edge>
+    <node xmi:type="uml:InitialNode" xmi:id="_i5qDsBxUEeiktqE5H6Adsg" name="Initial1" outgoing="_xkan8BxUEeiktqE5H6Adsg"/>
+    <node xmi:type="uml:ActivityParameterNode" xmi:id="_kcKYQBxUEeiktqE5H6Adsg" name="Parameter1" parameter="_kcJxMBxUEeiktqE5H6Adsg">
+      <upperBound xmi:type="uml:LiteralInteger" xmi:id="_kcKYQRxUEeiktqE5H6Adsg" value="1"/>
+    </node>
+    <node xmi:type="uml:DecisionNode" xmi:id="_vwt1sBxUEeiktqE5H6Adsg" name="Comparison Kind" incoming="_xkan8BxUEeiktqE5H6Adsg" outgoing="_QKv4EBxVEeiktqE5H6Adsg _huy9oBxVEeiktqE5H6Adsg _Ne6HcBxWEeiktqE5H6Adsg"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_IAVbYBxVEeiktqE5H6Adsg" name="Compare Single Events" incoming="_QKv4EBxVEeiktqE5H6Adsg" outgoing="_TkjFcBxVEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction1</body>
+    </node>
+    <node xmi:type="uml:ActivityFinalNode" xmi:id="_RUGs0BxVEeiktqE5H6Adsg" name="Final" incoming="_TkjFcBxVEeiktqE5H6Adsg _2ufqsBxVEeiktqE5H6Adsg _mnO2wBxWEeiktqE5H6Adsg"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_cOZQIBxVEeiktqE5H6Adsg" name="Compare SIngle with Recurrent" incoming="_huy9oBxVEeiktqE5H6Adsg" outgoing="_qM2IABxVEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction2</body>
+    </node>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_leoFYBxVEeiktqE5H6Adsg" name="Generate all Recurring Occurrences" incoming="_qM2IABxVEeiktqE5H6Adsg" outgoing="_2BxHkBxVEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction3</body>
+    </node>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_vvKhEBxVEeiktqE5H6Adsg" name="Check if Occurrences contain Single Event" incoming="_2BxHkBxVEeiktqE5H6Adsg" outgoing="_2ufqsBxVEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction4</body>
+    </node>
+    <node xmi:type="uml:ForkNode" xmi:id="_HFZnsBxWEeiktqE5H6Adsg" name="Fork1" incoming="_OkUQUBxWEeiktqE5H6Adsg" outgoing="_ca_sQBxWEeiktqE5H6Adsg _dUBmABxWEeiktqE5H6Adsg"/>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_Iu6jMBxWEeiktqE5H6Adsg" name="Compare two Recurrent Events" incoming="_Ne6HcBxWEeiktqE5H6Adsg" outgoing="_OkUQUBxWEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction5</body>
+    </node>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_QV14UBxWEeiktqE5H6Adsg" name="Generate all occurrences for event One" incoming="_ca_sQBxWEeiktqE5H6Adsg" outgoing="_gggwIBxWEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction6</body>
+    </node>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_WKCEgBxWEeiktqE5H6Adsg" name="Generate all occurrences for event Other" incoming="_dUBmABxWEeiktqE5H6Adsg" outgoing="_heai0BxWEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction7</body>
+    </node>
+    <node xmi:type="uml:JoinNode" xmi:id="_e4kh8BxWEeiktqE5H6Adsg" name="Join1" incoming="_gggwIBxWEeiktqE5H6Adsg _heai0BxWEeiktqE5H6Adsg" outgoing="_l4hWoBxWEeiktqE5H6Adsg">
+      <joinSpec xmi:type="uml:LiteralBoolean" xmi:id="_e4lJABxWEeiktqE5H6Adsg" name="Join1" value="true"/>
+    </node>
+    <node xmi:type="uml:OpaqueAction" xmi:id="_iK084BxWEeiktqE5H6Adsg" name="Intersection" incoming="_l4hWoBxWEeiktqE5H6Adsg" outgoing="_mnO2wBxWEeiktqE5H6Adsg">
+      <body>// TODO body of OpaqueAction8</body>
+    </node>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3PnQMBxUEeiktqE5H6Adsg" name="Occurrence" visibility="public">
+    <ownedAttribute xmi:id="_83b0UBxUEeiktqE5H6Adsg" name="slot" visibility="public" type="_3AIj4BYsEeitmIFlZvlVIA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_83b0URxUEeiktqE5H6Adsg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_83b0UhxUEeiktqE5H6Adsg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
 </uml:Model>
