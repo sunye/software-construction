@@ -23,6 +23,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial 4.0 In
 - «Extreme programming explained: embrace change. Kent Beck. Addison-Wesley, 1999.
 - «Test-Driven Development: By Example». Kent Beck. Addison-Wesley, 2002. 
 - «Test-Driven Development: A Practical Guide». David Astels. Prentice Hall, 2003. 
+- «Head First Design Patterns: A Brain-Friendly Guide». Bert Bates, Kathy Sierra, Eric Freeman, Elisabeth Robson. O'Reilly Media, June 2009.
 
 ----
 
