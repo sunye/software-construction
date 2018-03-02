@@ -11,3 +11,4 @@ target
 *.out
 *.aux
 *.synctex.gz
+.DS_Store
