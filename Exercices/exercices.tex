@@ -388,7 +388,7 @@ post: result = value >= begin and value <= end
 			\lstinputlisting[language=Java]{./src/main/java/fr/unantes/agenda/Interval.java}
 \end{solution}
 
-
+\newpage
 \section{Implementing Operations from Activity diagrams}
 
 Consider the classes \code{Event}, \code{SingleEvent} and \code{RecurrentEvent} illustrated by Figure~\ref{fig:recurrent}.
@@ -439,9 +439,11 @@ This method must generate all occurrences of a recurrent event.
 \begin{solution}
 \lstset{language=Java, caption={Operation conflictsWith()},}
 \lstinputlisting{./src/main/java/fr/unantes/agenda/Event.java}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/Frequency.java}
 \lstinputlisting{./src/main/java/fr/unantes/agenda/AbstractEvent.java}
 \lstinputlisting{./src/main/java/fr/unantes/agenda/SingleEvent.java}
 \lstinputlisting{./src/main/java/fr/unantes/agenda/RecurrentEvent.java}
+\lstinputlisting{./src/main/java/fr/unantes/agenda/TimeSlot.java}
 \end{solution}
 
 \begin{question}
