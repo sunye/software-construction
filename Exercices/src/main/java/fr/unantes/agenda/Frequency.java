@@ -12,7 +12,7 @@ public enum Frequency {
     DAILY(ChronoUnit.DAYS),
     WEEKLY(ChronoUnit.WEEKS),
     MONTHLY(ChronoUnit.MONTHS),
-    YEARL (ChronoUnit.YEARS);
+    YEARLY (ChronoUnit.YEARS);
 
     private ChronoUnit unit;
 

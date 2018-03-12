@@ -3,6 +3,7 @@
 % Created by Gerson Sunyé on 2016-12-14.
 % Copyright (c) 2016 .
 \documentclass[a4paper,11pt]{memoir}
+\usepackage[]{xsim}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage{listings,multicol}
@@ -17,20 +18,21 @@
 \usepackage[french,boxed,lined]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{siunitx}
-\usepackage{exsheets}
-\SetupExSheets{solution/print=true}
+\xsimsetup{solution/print=false}
 \usepackage{booktabs}
 \usepackage{paralist}
 
 
 \lstset{basicstyle=\footnotesize,
-	tabsize=3,
 	keywordstyle=\bfseries,
 	stringstyle=\ttfamily,
 	showstringspaces=\false,
 	frame=tb,
 	commentstyle=\itshape\color{magenta},
-	%extendedchars=\true,
+	extendedchars=true,
+	showtabs=false,
+	tabsize=2,
+	tab=$\mapsto$,
 	numbers=left, 
 	numberstyle=\tiny,
 	sensitive,
@@ -69,10 +71,10 @@
 \chapterstyle{ell}
 
 
-% \firstpageheader{Test logiciel}{Exercices}{Page \thepage\ of \numpages}
+% \firstpageheader{Test logiciel}{exercises}{Page \thepage\ of \numpages}
 % \firstpageheadrule
 
-\title{{\Huge\bfseries Software Construction and Evolution} \\[5pt] {\Large\bfseries Instructor-led Exercices}}
+\title{{\Huge\bfseries Software Construction and Evolution} \\[5pt] {\Large\bfseries Instructor-led exercises}}
 \date{}
 \author{Gerson Sunyé \\ \href{mailto:gerson.sunye@univ-nantes.fr}{gerson.sunye@univ-nantes.fr} \\ Université de Nantes
 \and Gilles Ardourel \\ \href{matilto:gilles.ardourel@univ-nantes.fr}{gilles.ardourel@univ-nantes.fr} \\ Université de Nantes
@@ -89,7 +91,7 @@
 \settowidth{\unitlength}{\CP} % Set the width of the curly brackets to the width of the title
 {\color{LightGoldenrod}\resizebox*{\unitlength}{\baselineskip}{\rotrt{$\}$}}} \\[\baselineskip] % Print top curly bracket
 \textcolor{Sienna}{\CP} \\[\baselineskip] % Print title
-{\color{RosyBrown}\Large Instructor-led Exercices} \\ % Tagline or further description
+{\color{RosyBrown}\Large Instructor-led exercises} \\ % Tagline or further description
 {\color{LightGoldenrod}\resizebox*{\unitlength}{\baselineskip}{\rotlft{$\}$}}} % Print bottom curly bracket
 
 \vfill % Whitespace between the title and the author name
@@ -115,8 +117,8 @@
 
 % \begin{center}
 %   \fbox{\parbox{0.9\textwidth}{\centering
-%         Answer the questions in the spaces provided on the
-%         question sheets. If you run out of room for an answer,
+%         Answer the exercises in the spaces provided on the
+%         exercise sheets. If you run out of room for an answer,
 %         continue on the back of the page.}}
 % \end{center}
 
@@ -124,7 +126,7 @@
 % \makebox[0.9\textwidth]{Name:\enspace\hrulefill}
 
 
-%\begin{questions}
+%\begin{exercises}
 	
 \chapter{Mapping UML Designs to Code \\ Structural Aspects}
 
@@ -132,7 +134,7 @@
 During Software Construction, the mapping between design models and source code is essential. 
 Use the concepts introduced during the lectures to propose the implementation of the design models below.
 
-\begin{question}\textbf{Type Correspondence}
+\begin{exercise}\textbf{Type Correspondence}
 
 \begin{inparaenum}[(A)]
 	\item First, complete Table~\ref{tab:monovalued} to propose a correspondence between UML and Java types for mono-valued attributes.
@@ -175,12 +177,12 @@ UnlimitedNatural & \\
 			\caption{Types for multi-valued attributes}
 			\label{tab:multivalued}
 		\end{table}
-\end{question}
+\end{exercise}
 
 
 
 
-\begin{question}
+\begin{exercise}
 	\textbf{Attribute Implementation (Getter/Setter approach)} 
 	
 Use Java to implement the class \code{Event} and its attributes. 
@@ -200,7 +202,7 @@ Use the Getter/Setter implementation strategy introduced during the lectures.
 	\item Finally, declare the fields' accessors and modifiers (getters and setters). Remember to respect the attribute visibility.
 	\item Now, decide how to deal with errors, for instance a start date that is later than the end date. 
 \end{inparaenum}
-\end{question}
+\end{exercise}
 
 \begin{solution}
 			There are several ways to deal with errors in Java. In my solution I used assertions, which is a simple solution, but not adapted to public methods. Using runtime exceptions, such as \code{IllegalArgumentException} for the dates and \code{IndexOutOfBoundsException} for multivalued attributes is a more ``java-oriented'' approach. Another interesting approach is the use of AssertJ, which helps developers to specify simple and elegant assertions. Guava, Apache commons, and Lombok are also interesting alternatives to validate parameters.
@@ -213,7 +215,7 @@ Use the Getter/Setter implementation strategy introduced during the lectures.
 \end{solution}
 	
 	
-\begin{question}
+\begin{exercise}
 	\textbf{Attribute Implementation (Wrapper approach)}
 	
 Now, use the Wrapper implementation strategy introduced during the lectures to implement the Event class.
@@ -221,7 +223,7 @@ Now, use the Wrapper implementation strategy introduced during the lectures to i
 		\item For dealing with the multi-valued attribute \code{alarm}, define a wrapper class that is able to check its multiplicity.
 		\item Do the same for the mono-valued attributes. Use Java generic types.
 	\end{inparaenum}
-\end{question}
+\end{exercise}
 \begin{solution}
 	\lstinputlisting[language=Java]{./src/main/java/fr/unantes/event/Event.java}
 	\lstinputlisting[language=Java]{./src/main/java/fr/unantes/event/MonovaluedAttribute.java}
@@ -230,7 +232,7 @@ Now, use the Wrapper implementation strategy introduced during the lectures to i
 \end{solution}
 
 
-\begin{question}
+\begin{exercise}
 	\textbf{Unidirectional Association Implementation}
 
 Figures~\ref{fig:unidirectional} and~\ref{fig:unique} present two different versions of a unidirectional association between the classes \code{Window} and \code{Field}.
@@ -258,7 +260,7 @@ Use Java to implement the classes \code{Window} and \code{Field}, as well as the
 	\item Then, declare the Java classes and its fields.
 \end{inparaenum}
 
-\end{question}
+\end{exercise}
 
 \begin{solution}
 		\lstset{language=Java}
@@ -268,7 +270,7 @@ Use Java to implement the classes \code{Window} and \code{Field}, as well as the
 
 
 
-\begin{question}
+\begin{exercise}
 	\textbf{Bidirectional Association Implementation}
 
 The UML class model presented in Figures~\ref{fig:readOnly} and~\ref{fig:bidirectional}
@@ -299,7 +301,7 @@ Remember that you must handle the handshake problem.
 	\item Finally, declare the Java classes \code{Window} and \code {Field}, and their fields.
 \end{inparaenum}
 	
-\end{question}
+\end{exercise}
 
 \begin{solution}
 		\lstset{language=Java}
@@ -307,7 +309,7 @@ Remember that you must handle the handshake problem.
 		\lstinputlisting{./src/main/java/fr/unantes/bidirectional/Field.java}	
 \end{solution}
 
-\begin{question}
+\begin{exercise}
 	\textbf{Wrapping Things Up}
 	
 	Use Java to implement the diagram depicted by Figure~\ref{fig:team}.
@@ -319,7 +321,7 @@ Remember that you must handle the handshake problem.
 		\label{fig:team}
 	\end{figure}
 	
-\end{question}
+\end{exercise}
 
 \chapter{Mapping UML Designs to Code \\ Behavioral Aspects}
 
@@ -361,27 +363,27 @@ post: result = value >= begin and value <= end
 \end{ocl}
 
 
-\begin{question}
+\begin{exercise}
 	First, use JUnit to write some unit tests that verify that the class invariant is correctly respected as well as the correction of the tool operations.
-\end{question}
+\end{exercise}
 
 \begin{solution}
 	\lstset{language=Java}
 	\lstinputlisting[language=Java]{./src/test/java/fr/unantes/agenda/IntervalTest.java}
 \end{solution}
 
-\begin{question}
+\begin{exercise}
 	Second, implement the class «Interval» and its two attributes, without the two operations.
 	Propose an approach to ensure that the class invariant will never be violated.
-\end{question}
+\end{exercise}
 
 \begin{solution}
 	Sorry no correction for now, but I guess the invariant can be checked in the constructor and both attributes could be final.
 \end{solution}
 
-\begin{question}
+\begin{exercise}
 	 Finally, implement the operations \code{includes()} and \code{overlapsWith()}, respecting the post-conditions specified above.
-\end{question}
+\end{exercise}
 
 \begin{solution}
 	\lstset{language=Java, caption={Class Interval},}
@@ -413,14 +415,14 @@ This is rather simple for single events, but complex for recurrent events.
 \end{figure}
 
 
-\begin{question}
+\begin{exercise}
 	First, use a «double dispatch» mechanism to choose the correct implementation of the \code{conflictsWith()} operation.
 	
 	\begin{inparaenum}[(A)]
 		\item Add the methods \code{conflictsWithSingleEvent()} and \code{conflictsWithRecurrentEvent()} to the \code{Event} class.
 		\item Implement the methods \code{SingleEvent::conflictsWith()} and \code{RecurrentEvent::conflictsWith()} and make them call the correct implementation methods.
 	\end{inparaenum}
-\end{question}
+\end{exercise}
 
 \begin{solution}
 \begin{enumerate}
@@ -431,10 +433,10 @@ This is rather simple for single events, but complex for recurrent events.
 \end{enumerate}
 \end{solution}
 
-\begin{question}
+\begin{exercise}
 Add a method named \code{occurrences()} to class \code{RecurrentEvent}.
 This method must generate all occurrences of a recurrent event. 
-\end{question}
+\end{exercise}
 
 \begin{solution}
 \lstset{language=Java, caption={Operation conflictsWith()},}
@@ -446,11 +448,160 @@ This method must generate all occurrences of a recurrent event.
 \lstinputlisting{./src/main/java/fr/unantes/agenda/TimeSlot.java}
 \end{solution}
 
-\begin{question}
+\begin{exercise}
 Finally, implement the 3 \code{conflictsWith()} methods: one that compares 2 single events, one that compares a single event with
 a recurrent event, and one that compares two recurrent events.
-\end{question}
+\end{exercise}
 
+\chapter{Refactoring to Patterns}
+
+\section{Code Simplification}
+\subsection{Introduce Compose Method}
+The ``Compose Method\footnote{\url{http://c2.com/ppr/wiki/WikiPagesAboutRefactoring/ComposedMethod.html}}'' pattern is about producing methods that efficiently communicate what they do and how they do what they do. 
+According to Kent Beck:
+
+\begin{quotation}
+	«Divide your program into methods that perform one identifiable task. Keep all of the operations in a method at the same level of abstraction. 
+	This will naturally result in programs with many small methods, each a few lines long.»
+\end{quotation}
+
+A Composed Method consists of calls to well-named methods that are all at the same level of detail.
+Follow the instructions below to simplify the method \code{add()}~\cite{Kerievsky:2004}:
+
+\lstset{language=Java, caption={Class ArrayList}}
+\lstinputlisting{./src/main/java/fr/unantes/refactorings/ArrayList.java}
+
+\begin{exercise}
+	Invert the ``readonly'' check to a ``Guard Clause''.
+\end{exercise}
+
+\begin{solution}
+\begin{lstlisting}[caption=cap,label=lst:lab]
+    if (readOnly) {
+        return;
+    }
+\end{lstlisting}
+
+\end{solution}
+
+\begin{exercise}
+	Apply the ``Extract Method'' operation to lines 19-20 and create the method \code{void addElement(object)}.
+\end{exercise}
+
+\begin{exercise}
+	Apply the ``Extract Constant'' operation to replace the magic number ``10 '' and introduce an ``Explaining Variable'' called \code{GROWTH_INCREMENT}.
+\end{exercise}
+
+\begin{exercise}
+	Apply the ``Inline variable'' operation to \code{newSize} and then apply the ``Extract Method'' operation again to the code that checks whether the element array is at its capacity and needs to grow, and create the method \code{atCapacity()}.
+\end{exercise}
+
+\begin{exercise}
+	Finally, apply the ``Extract Method'' operation to the code that grows the size of the \code{elements} array, creating the \code{grow()} method.
+\end{exercise}
+
+\begin{solution}
+	\lstset{language=Java, caption={Class ArrayList after Refactoring}}
+	\lstinputlisting{./src/main/java/fr/unantes/refactorings/ArrayListRefactored.java}
+\end{solution}
+
+\newpage
+
+\subsection{Replace Conditional Logic with Strategy}
+
+\url{http://www.informit.com/articles/article.aspx?p=1398607&seqNum=2}
+
+
+\lstset{caption=The Loan Class,label=lst:loan,float=htbp}
+\lstinputlisting{./src/main/java/fr/unantes/refactorings/Loan.java}
+	
+
+\begin{exercise}
+	First, create a class called \code{CapitalStrategy} and add a method called \code{capital()}, with an empty body. 
+\end{exercise}
+\begin{solution}
+\begin{lstlisting}[caption=cap,label=lst:lab,float=htbp]
+public class CapitalStrategy {
+    public double capital(Loan loan) {
+        return 0.0;
+    }
+}
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}
+Now, apply the ``Move Method'' refactoring operation to move the \code{capital()} method to class \code{CapitalStrategy}.  This involves:
+
+\begin{enumerate}
+	\item Changing the visibility of some private methods: \code{getUnusedPercentage()}, \code{outstandingRiskAmount()}, \code{riskFactor()}, \code{unusedRiskAmount()}, and \code{unusedRiskFactor()}.
+	\item Encapsulating fields \code{commitment}, \code{expiry}, \code{maturity}, and \code{payments}.
+	\item Creating a simple version of method \code{capital()} on class \code{Loan}, which delegates to an instance of \code{CapitalStrategy}.
+	\item Moving the method and replacing all references to \code{this} by \code{loan}.
+\end{enumerate}
+
+\end{exercise}
+\begin{solution}
+\begin{lstlisting}[caption=cap,label=lst:lab,float=htbp]
+public class LoanRefactored {
+    // (...)
+
+    public double capital() {
+        return new CapitalStrategy().capital(this);
+    }
+    // (...)
+    protected double riskFactor() {
+        return RiskFactor.getFactors().forRating(riskRating);
+    }
+
+    protected double unusedRiskFactor() {
+        return UnusedRiskFactors.getFactors().forRating(riskRating);
+    }
+
+    protected double getUnusedPercentage() {
+        return 0.0;
+    }
+
+    protected Date getMaturity() {
+        return maturity;
+    }
+
+    protected Date getExpiry() {
+        return expiry;
+    }
+
+    protected double getCommitment() {
+        return commitment;
+    }
+
+    protected List<Payment> getPayments() {
+        return payments;
+    }
+}
+
+public class CapitalStrategy {
+    public double capital(LoanRefactored loan) {
+        if (loan.getExpiry() == null && loan.getMaturity() != null)
+            return loan.getCommitment() * loan.duration() * loan.riskFactor();
+        if (loan.getExpiry() != null && loan.getMaturity() == null) {
+            if (loan.getUnusedPercentage() != 1.0)
+                return loan.getCommitment() *loan.getUnusedPercentage() * loan.duration() * loan.riskFactor();
+            else
+                return (loan.outstandingRiskAmount() * loan.duration() * loan.riskFactor())
+                        + (loan.unusedRiskAmount() * loan.duration() * loan.unusedRiskFactor());
+        }
+        return 0.0;
+    }
+}
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}
+	Since some methods, such as \code{duration()}, \code{weightedAverageDuration()}, \code{yearsTo()},  \code{riskFactor()} and \code{unusedRiskFactor()} are only used by method \code{capital()}, we can move them to class \code{CapitalStrategy} as well.
+	The two constants, \code{MILLIS_PER_DAY} and \code{DAYS_PER_YEAR} can also be moved to class  \code{CapitalStrategy}.
+\end{exercise}
+
+\bibliographystyle{abbrv}
+\bibliography{references}
 \end{document}
 
 
