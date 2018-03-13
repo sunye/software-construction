@@ -18,12 +18,12 @@
 \usepackage[french,boxed,lined]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{siunitx}
-\xsimsetup{solution/print=false}
+\xsimsetup{solution/print=true}
 \usepackage{booktabs}
 \usepackage{paralist}
 
 
-\lstset{basicstyle=\footnotesize,
+\lstset{basicstyle=\tiny,
 	keywordstyle=\bfseries,
 	stringstyle=\ttfamily,
 	showstringspaces=\false,
@@ -65,7 +65,8 @@
 
 
 		
-\newcommand{\code}[1]{\lstinline{#1}} 
+%{\newcommand{\code}[1]{\lstinline{#1}} 
+\newcommand{\code}[1]{{\texttt #1}} 
 \graphicspath{{./img/}}
 
 \chapterstyle{ell}
@@ -489,7 +490,7 @@ Follow the instructions below to simplify the method \code{add()}~\cite{Kerievsk
 \end{exercise}
 
 \begin{exercise}
-	Apply the ``Extract Constant'' operation to replace the magic number ``10 '' and introduce an ``Explaining Variable'' called \code{GROWTH_INCREMENT}.
+	Apply the ``Extract Constant'' operation to replace the magic number ``10 '' and introduce an ``Explaining Variable'' called \code{GROWTH\_INCREMENT}.
 \end{exercise}
 
 \begin{exercise}
@@ -509,18 +510,33 @@ Follow the instructions below to simplify the method \code{add()}~\cite{Kerievsk
 
 \subsection{Replace Conditional Logic with Strategy}
 
-\url{http://www.informit.com/articles/article.aspx?p=1398607&seqNum=2}
-
+The  Strategy pattern defines a family of algorithms, encapsulates each algorithm, and make them interchangeable, letting the algorithm vary independently from clients that use it.
+We can apply this pattern to classes where several methods have similar structure: a sequence of similar conditions.
+For instance, let us consider the \code{Loan} class\footnote{\url{http://www.informit.com/articles/article.aspx?p=1398607&seqNum=2}}, from Joshua Kerievsky's book~\cite{Kerievsky:2004}, presented in Listing~\ref{lst:loan}.
 
 \lstset{caption=The Loan Class,label=lst:loan,float=htbp}
 \lstinputlisting{./src/main/java/fr/unantes/refactorings/Loan.java}
+
+This class deals with calculating capital for three different kinds of bank loans: 
+
+\begin{description}
+	\item [Term loan]: a loan from a bank for a specific amount that has a specified repayment schedule and a fixed or floating interest rate. 
+	\item [Revolver]: a credit that is automatically renewed as debts are paid off; and
+	\item [Advised line]: a credit that a financial institution approves and maintains for a customer.
+\end{description}
+
+Much of the logic of methods \code{capital()} and \code{duration()} deals with figuring out whether the loan is a term loan, a revolver, or an advised line. 
+For example, a null expiry date and a non-null maturity date indicate a term loan. 
+A null maturity and a non-null expiry date indicate a revolver loan.
+
+In this exercise, we will use the Strategy pattern to simplify the calculation of the loan's capital.
 	
 
 \begin{exercise}
 	First, create a class called \code{CapitalStrategy} and add a method called \code{capital()}, with an empty body. 
 \end{exercise}
 \begin{solution}
-\begin{lstlisting}[caption=cap,label=lst:lab,float=htbp]
+\begin{lstlisting}[caption=cap,label=lst:lab]
 public class CapitalStrategy {
     public double capital(Loan loan) {
         return 0.0;
@@ -534,14 +550,19 @@ Now, apply the ``Move Method'' refactoring operation to move the \code{capital()
 
 \begin{enumerate}
 	\item Changing the visibility of some private methods: \code{getUnusedPercentage()}, \code{outstandingRiskAmount()}, \code{riskFactor()}, \code{unusedRiskAmount()}, and \code{unusedRiskFactor()}.
-	\item Encapsulating fields \code{commitment}, \code{expiry}, \code{maturity}, and \code{payments}.
+	\item Encapsulating fields \code{commitment}, \code{expiry}, \code{maturity}, \code{riskRating}, \code{today}, \code{start}, and \code{payments}.
 	\item Creating a simple version of method \code{capital()} on class \code{Loan}, which delegates to an instance of \code{CapitalStrategy}.
 	\item Moving the method and replacing all references to \code{this} by \code{loan}.
 \end{enumerate}
 
 \end{exercise}
 \begin{solution}
-\begin{lstlisting}[caption=cap,label=lst:lab,float=htbp]
+	\begin{itemize}
+		\item Maybe we should remember that "protected" methods are accessible from classes belonging to the same package.
+	\end{itemize}
+	
+	
+\begin{lstlisting}[caption=cap,label=lst:label]
 public class LoanRefactored {
     // (...)
 
@@ -596,9 +617,75 @@ public class CapitalStrategy {
 \end{solution}
 
 \begin{exercise}
-	Since some methods, such as \code{duration()}, \code{weightedAverageDuration()}, \code{yearsTo()},  \code{riskFactor()} and \code{unusedRiskFactor()} are only used by method \code{capital()}, we can move them to class \code{CapitalStrategy} as well.
-	The two constants, \code{MILLIS_PER_DAY} and \code{DAYS_PER_YEAR} can also be moved to class  \code{CapitalStrategy}.
+	Apply the ``Move Method'' refactoring operation again to move the \code{duration()} method to class \code{CapitalStrategy}. 
 \end{exercise}
+\begin{solution}
+\begin{lstlisting}[caption={duration() method},label=lst:lab]
+    public double duration(LoanRefactored loan) {
+        if (loan.getExpiry() == null && loan.getMaturity() != null)
+            return this.weightedAverageDuration(loan);
+        else if (loan.getExpiry() != null && loan.getMaturity() == null)
+            return loan.strategy.yearsTo(loan.getExpiry(), loan);
+        return 0.0;
+    }
+\end{lstlisting}
+\end{solution}
+
+\begin{exercise}
+	Since some methods, such as \code{duration()}, \code{weightedAverageDuration()}, \code{yearsTo()},  \code{riskFactor()} and \code{unusedRiskFactor()} are only used by method \code{capital()}, we can move them to class \code{CapitalStrategy} as well.
+	The two constants, \code{MILLIS\_PER\_DAY} and \code{DAYS\_PER\_YEAR} can also be moved to class  \code{CapitalStrategy}.
+\end{exercise}
+\begin{solution}
+	\begin{itemize}
+		\item After these refactorings, the code should be: 
+	\end{itemize}
+	\lstset{caption={The LoanRefactored Class},label=lst:loan:refactored,float=htbp}
+	\lstinputlisting{./src/main/java/fr/unantes/refactorings/LoanRefactored.java}
+	\lstset{caption=The CapitalStrategy Class,label=lst:capital:strategy,float=htbp}
+	\lstinputlisting{./src/main/java/fr/unantes/refactorings/CapitalStrategy.java}
+\end{solution}
+
+\begin{exercise}
+	Finally, apply the ``Replace Conditional with Polymorphism '' refactoring operation on method \code{capital()} method. 
+	First, create a subclass named \code{CapitalStrategyTermLoan} for the capital calculation for a term loan.
+	Then, move and adapt methods \code{capital()}, \code{duration}, and \code{weightedAverageDuration} to the subclass.
+\end{exercise}
+
+\begin{solution}
+	\begin{lstlisting}[caption=cap,label=lst:lab]
+public class CapitalStrategyTermLoan extends CapitalStrategy {
+   public double capital(Loan loan) {
+      return loan.getCommitment() * duration(loan) * riskFactorFor(loan);
+   }
+
+   public double duration(Loan loan) {
+      return weightedAverageDuration(loan);
+   }
+
+   private double weightedAverageDuration(Loan loan) {
+      double duration = 0.0;
+      double weightedAverage = 0.0;
+      double sumOfPayments = 0.0;
+      Iterator loanPayments = loan.getPayments().iterator();
+      while (loanPayments.hasNext()) {
+         Payment payment = (Payment)loanPayments.next();
+         sumOfPayments += payment.amount();
+         weightedAverage += yearsTo(payment.date(), loan) * payment.amount();
+      }
+      if (loan.getCommitment() != 0.0)
+         duration = weightedAverage / sumOfPayments;
+      return duration;
+   }		
+	\end{lstlisting}
+
+In the end, class \code{CapitalStrategy} is abstract:
+
+
+	\lstset{caption={The CapitalStrategy Class - Final version},label=lst:capital:strategy,float=htbp}
+	\lstinputlisting{./src/main/java/fr/unantes/refactorings/CapitalStrategyRefactored.java}
+
+	
+\end{solution}
 
 \bibliographystyle{abbrv}
 \bibliography{references}

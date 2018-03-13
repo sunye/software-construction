@@ -7,7 +7,7 @@ public class ArrayList {
 
     public void add(Object child) {
         if (!readOnly) {
-            int newSize = elements.length + 1;
+            int newSize = size + 1;
             if (newSize > elements.length) {
                 Object[] newElements = new Object[elements.length + 10];
                 for (int i = 0; i < size; i++) {

@@ -26,15 +26,23 @@ public class Loan {
     private int riskRating;
 
     public double capital() {
-        if (expiry == null && maturity != null)
+        if (expiry == null && maturity != null) // Term Loan
             return commitment * duration() * riskFactor();
         if (expiry != null && maturity == null) {
-            if (getUnusedPercentage() != 1.0)
+            if (getUnusedPercentage() != 1.0) // Revolver
                 return commitment * getUnusedPercentage() * duration() * riskFactor();
-            else
+            else // Advised Line
                 return (outstandingRiskAmount() * duration() * riskFactor())
                         + (unusedRiskAmount() * duration() * unusedRiskFactor());
         }
+        return 0.0;
+    }
+
+    public double duration() {
+        if (expiry == null && maturity != null)
+            return weightedAverageDuration();
+        else if (expiry != null && maturity == null)
+            return yearsTo(expiry);
         return 0.0;
     }
 
@@ -46,13 +54,7 @@ public class Loan {
         return (commitment - outstanding);
     }
 
-    public double duration() {
-        if (expiry == null && maturity != null)
-            return weightedAverageDuration();
-        else if (expiry != null && maturity == null)
-            return yearsTo(expiry);
-        return 0.0;
-    }
+
 
     private double weightedAverageDuration() {
         double duration = 0.0;
