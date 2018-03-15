@@ -8,5 +8,7 @@
 	"unit-test.md", 
 	"tdd-en.md",
 	"generation.md", 
-	"patterns.md"
+	"patterns.md",
+	"ci.md",
+	"maven.md"
 ]
