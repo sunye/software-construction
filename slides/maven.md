@@ -223,7 +223,9 @@ If the groupId is a fully qualified domain name such as `z.y.x` then you would e
 1. Add System variable M2_HOME as well as $M2_HOME/bin directory to your system path.
 1. Type the following in a terminal or command prompt: 
 
-    mvn --version
+```sh
+mvn --version
+```
 
 ----
 
@@ -327,14 +329,18 @@ mvn archetype:generate -DgroupId=fr.unantes.datatypes
   - `**/Abstract*Test.java`
   - `**/Abstract*TestCase.java`
 
-- Generate a basic website for the project: `mvn site`
-- Clean the project (remove the `target` directory): `mvn clean`
-
 ----
+## Website/Reports  Generation
 
+- Generate a basic website for the project: 
+  - `mvn site`
+- Clean the project (remove the `target` directory): 
+  - `mvn clean`
 - Create descriptor for the projects
-  - for IntelliJ IDEA: `mvn idea:idea`
-  - for eclipse: `mvn eclipse:eclipse`
+  - for IntelliJ IDEA: 
+    - `mvn idea:idea`
+  - for eclipse: 
+    - `mvn eclipse:eclipse`
 
 ----
 
