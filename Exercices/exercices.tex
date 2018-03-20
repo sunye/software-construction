@@ -18,7 +18,7 @@
 \usepackage[french,boxed,lined]{algorithm2e}
 \usepackage{amsmath}
 \usepackage{siunitx}
-\xsimsetup{solution/print=true}
+\xsimsetup{solution/print=false}
 \usepackage{booktabs}
 \usepackage{paralist}
 
@@ -684,8 +684,225 @@ In the end, class \code{CapitalStrategy} is abstract:
 	\lstset{caption={The CapitalStrategy Class - Final version},label=lst:capital:strategy,float=htbp}
 	\lstinputlisting{./src/main/java/fr/unantes/refactorings/CapitalStrategyRefactored.java}
 
-	
 \end{solution}
+
+\newpage
+
+\section{Chain Constructors}
+
+Classes may have several constructors: this is normal, as there may be different ways to instantiate objects of a same class.
+However, when there is duplicated code across two or more contacts, maintenance problems arise. 
+
+Consider the three constructors of class \code{Loan}~\cite{Kerievsky:2004}, presented in Listing~\ref{lst:loan:constructors}, which have duplicated code.
+We will use the refactoring operation named ``Chain Constructors'', whose goal is to remove duplication in constructors by making them call each other.
+
+First, we analyze these constructors to find out which one is the ``catch-all constructor'', the one that handles all of the construction details.
+It seems that it should be constructor 3, since making constructors 1 and 2 call 3 can be achieved with a minimum amount of work.
+
+\begin{lstlisting}[caption={Constructors for class \code{Loan}},label=lst:loan:constructors,float=htbp,frame=tb]
+public Loan(float notional, float outstanding, int rating, Date expiry) {
+   this.strategy = new TermROC();
+   this.notional = notional;
+   this.outstanding = outstanding;
+   this.rating = rating;
+   this.expiry = expiry;
+}
+
+public Loan(float notional, float outstanding, int rating, Date expiry, Date maturity) {
+   this.strategy = new RevolvingTermROC();
+   this.notional = notional;
+   this.outstanding = outstanding;
+   this.rating = rating;
+   this.expiry = expiry;
+   this.maturity = maturity;
+}
+
+public Loan(CapitalStrategy strategy, float notional, float outstanding, int rating, Date expiry, Date maturity) {
+   this.strategy = strategy;
+   this.notional = notional;
+   this.outstanding = outstanding;
+   this.rating = rating;
+   this.expiry = expiry;
+   this.maturity = maturity;
+}
+\end{lstlisting}
+
+
+
+\begin{exercise}
+Change constructor 1 to make it call constructor 3.
+\end{exercise}
+
+\lstset{caption={}}
+\begin{solution}
+\begin{java}
+public Loan(float notional, float outstanding, int rating, Date expiry) {
+    this(new TermROC(), notional, outstanding, rating, expiry, null);
+}	
+\end{java}
+\end{solution}
+
+
+\begin{exercise}
+Now, change constructor 2 to make it also call constructor 3.
+\end{exercise}
+
+\begin{solution}
+\begin{java}
+public Loan(float notional, float outstanding, int rating, Date expiry, Date maturity) {
+    this(new RevolvingTermROC(), notional, outstanding, rating, expiry, maturity);
+}	
+\end{java}
+\end{solution}
+
+
+\section{Replace Constructors with Creation Methods}
+The goal of the ``Replace Constructors with Creation Methods'' refactoring operation is to 
+replace constructors with intention-revealing creation methods that return object instances.
+
+Creation methods have at least two advantages, that cannot be achieved in Java. 
+First, they can have different names and thus communicate intention efficiently.
+Second, creation methods can have the same number of parameters.
+
+We will apply this refactoring to improve the constructions of class \code{Loan}.
+Consider another version of class \code{Loan}, presented in Listing~\ref{lst:load:constructors:bis}.
+
+\begin{lstlisting}[caption={Cascade Constructors for class \code{Loan}},label=lst:load:constructors:bis,float=htbp]
+public class Loan {
+
+    double commitment;
+    double outstanding;
+    int riskRating;
+    Date maturity;
+    Date expiry;
+    CapitalStrategy capitalStrategy;
+
+    public Loan(double commitment, int riskRating, Date maturity) {
+        this(commitment, 0.00, riskRating, maturity, null);
+    }
+
+    public Loan(double commitment, int riskRating, Date maturity, Date expiry) {
+       this(commitment, 0.00, riskRating, maturity, expiry);
+    }
+
+    public Loan(double commitment, double outstanding, int riskRating, Date maturity, Date expiry) {
+        this(null, commitment, outstanding, riskRating, maturity, expiry);
+    }
+
+    public Loan(CapitalStrategy capitalStrategy, double commitment, int riskRating, Date maturity, Date expiry) {
+        this(capitalStrategy, commitment, 0.00, riskRating, maturity, expiry);
+    }
+
+    public Loan(CapitalStrategy capitalStrategy, double commitment, double outstanding, int riskRating, Date maturity,
+            Date expiry) {
+        this.commitment = commitment;
+        this.outstanding = outstanding;
+        this.riskRating = riskRating;
+        this.maturity = maturity;
+        this.expiry = expiry;
+        this.capitalStrategy = capitalStrategy;
+
+        if (capitalStrategy == null) {
+            if (expiry == null)
+                this.capitalStrategy = new CapitalStrategyTermLoan();
+            else if (maturity == null)
+                this.capitalStrategy = new CapitalStrategyRevolver();
+            else
+                this.capitalStrategy = new CapitalStrategyRCTL();
+        }
+    }
+}
+\end{lstlisting}
+
+
+To apply this refactoring, we need to find a code that calls one of these constructors. For instance, in a test case:
+\begin{java}
+public class CapitalCalculationTests...
+   public void testTermLoanNoPayments() {
+      //...
+      Loan termLoan = new Loan(commitment, riskRating, maturity);
+      //...
+   }
+\end{java}
+
+\begin{exercise}
+	First, apply the ``Extract Method'' refactoring on that constructor call to produce a public, static method called \code{createTermLoan()}.
+\end{exercise}
+\begin{solution}
+\begin{java}
+public class CapitalCalculationTests{
+	public void testTermLoanNoPayments() {
+      //...
+      Loan termLoan = createTermLoan(commitment, riskRating, maturity);
+      //...
+   }
+   
+	public static Loan createTermLoan(double commitment, int riskRating, Date maturity) {
+		return new Loan(commitment, riskRating, maturity);
+	}
+}
+\end{java}	
+\end{solution}
+
+\begin{exercise}
+	Next, apply the ``Move Method'' refactoring on the creation method, \code{createTermLoan()}, to move it to \code{Loan}. 
+\end{exercise}
+\begin{solution}
+\begin{java}
+public class Loan {
+    // ...
+    public static Loan createTermLoan(double commitment, int riskRating, Date maturity) {
+        return new Loan(commitment, riskRating, maturity);
+    }
+}
+
+public class CapitalCalculationTest {
+    //...
+    public void testTermLoanNoPayments() {
+        // ...
+        Loan termLoan = Loan.createTermLoan(commitment, riskRating, maturity);
+        //...
+   }
+}
+\end{java}
+\end{solution}
+
+\begin{exercise}
+After doing that, we will need to find all callers of the constructor and update them to call \code{createTermLoan()}.
+Since now the \code{createTermLoan()} method is now the only caller on the constructor, we can apply the ``Inline Method''
+refactoring to this constructor.
+\end{exercise}
+
+\begin{solution}
+\begin{java}
+public static Loan createTermLoan(double commitment, int riskRating, Date maturity) {
+    return new Loan(commitment, 0.00, riskRating, maturity, null);
+}        
+\end{java}
+\end{solution}
+
+\begin{exercise}
+    Repeat the same procedure  to the other constructors, to create additional creation methods on class \code{Loan}.
+\end{exercise}
+\begin{solution}
+\begin{java}
+public static Loan newRevolver(double commitment, Date start, Date expiry, int riskRating) {
+    return new Loan(commitment, 0, start, expiry, null, riskRating, new CapitalStrategyRevolver());
+}
+
+public static Loan newAdvisedLine(double commitment, Date start, Date expiry, int riskRating) {
+    if (riskRating > 3) return null;
+    Loan advisedLine = new Loan(commitment, 0, start, expiry, null, riskRating, new CapitalStrategyAdvisedLine());
+      advisedLine.setUnusedPercentage(0.1);
+      return advisedLine;
+}
+\end{java}
+\end{solution}
+
+\begin{exercise}
+    Last step, since the constructors are only used by creation methods, they can become private.
+\end{exercise}
+
 
 \bibliographystyle{abbrv}
 \bibliography{references}
