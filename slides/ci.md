@@ -222,7 +222,7 @@ The capability to overcome resistance to implement improvements by using auto ma
   - Builds must be stable.
 - The build management tool is responsible for automatically carrying out all steps necessary to build the product.
 
----- 
+----
 
 ## Build Automatization Tools
 
