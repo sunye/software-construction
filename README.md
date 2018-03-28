@@ -25,6 +25,7 @@ After taking this course, the student should master the following subjects:
 7. [Test-Driven Development](https://sunye.github.io/software-construction/#/7)
 8. [Automatic Code Generation](https://sunye.github.io/software-construction/#/8)
 9. [Design Patterns](https://sunye.github.io/software-construction/#/9)
+  - [Software Patterns Catalog](https://sunye.github.io/software-patterns/)
 10. [Continuous Integration](https://sunye.github.io/software-construction/#/10)
 11. [Apache Maven](https://sunye.github.io/software-construction/#/11)
 
